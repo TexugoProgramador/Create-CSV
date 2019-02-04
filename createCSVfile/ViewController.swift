@@ -46,19 +46,6 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
                     present(emailController, animated: true, completion: nil)
                 }
                 
-//                let vc = UIActivityViewController(activityItems: [path], applicationActivities: [])
-//                vc.excludedActivityTypes = [
-//                    UIActivity.ActivityType.assignToContact,
-//                    UIActivity.ActivityType.saveToCameraRoll,
-//                    UIActivity.ActivityType.postToFlickr,
-//                    UIActivity.ActivityType.postToVimeo,
-//                    UIActivity.ActivityType.postToTencentWeibo,
-//                    UIActivity.ActivityType.postToTwitter,
-//                    UIActivity.ActivityType.postToFacebook,
-//                    UIActivity.ActivityType.openInIBooks
-//                ]
-//                present(vc, animated: true, completion: nil)
-//
             } catch {
                 
                 print("Erro ao criar arquivo")
@@ -67,6 +54,16 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     @IBAction func exportaRelatorio(_ sender: UIButton) {
+        
+        let image = UIImage(named: "image")
+        
+        let imageToShare = [ image! ]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+        
+        self.present(activityViewController, animated: true, completion: nil)
     }
 }
 
